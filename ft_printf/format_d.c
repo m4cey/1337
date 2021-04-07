@@ -8,7 +8,12 @@ int base_d(format_t fmt, char *str, int val) {
         putchar('-');
     while (fmt.precision >= 0 && i < fmt.precision && i++)
         putchar('0');
-    putstr(str);
+    if (fmt.precision == 0 && val == 0) {
+        if (fmt.width > 0)
+            putchar(' ');
+    }
+    else
+        putstr(str);
     return (i);
 }
 

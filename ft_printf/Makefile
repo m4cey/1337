@@ -1,12 +1,13 @@
 FLAGS = -Wall -Werror -Wextra -g
 NAME = out
 
-out: *.c ft_printf.h
+all: *.c ft_printf.h
+	gcc $(FLAGS) -g -c *.c
+	ar rv libftprintf.a *.o
+	ranlib libftprintf.a
+r: *.c ft_printf.h
 	gcc $(FLAGS) *.c build/main.c -o build/$(NAME)
-r: $(NAME)
 	build/$(NAME)
 clean:
-	rm build/$(NAME)
-test: *.c build/tester.c ft_printf.h
-	gcc $(FLAGS) *.c build/tester.c -o build/test
-	build/test
+	rm -f build/$(NAME)
+	rm -f *.o libftprintf.a

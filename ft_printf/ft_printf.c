@@ -25,7 +25,6 @@ int ft_printf(const char *str, ...){
             }
             else if(parse(&fmt, &str, ap) < 0)
                 return (-1);
-            print_format(fmt);
             ret += evaluate(fmt, ap);
             clear_format(&fmt);
         }
