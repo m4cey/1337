@@ -20,25 +20,21 @@ typedef struct {
     int		is_var_precision;
     char	specifier;
 } format_t;
-typedef int (*format_callback)(format_t fmt, va_list ap);
 
 int		ft_printf(const char *str, ...);
-void	print_format(format_t fmt);
-char*	tostr(int num);
 int		parse(format_t *fmt, const char **str, va_list ap);
 int		evaluate(format_t fmt, va_list ap);
-void  putstr(const char *str);
 
-int		format_c(format_t fmt, va_list ap);
-int		format_s(format_t fmt, va_list ap);
+int		format_c(format_t fmt, char val);
+int		format_s(format_t fmt, char *val);
 //int		format_p(format_t fmt, va_list ap);
-int		format_d(format_t fmt, va_list ap);
-/*
-   int		format_i(format_t fmt, va_list ap);
-   int		format_u(format_t fmt, va_list ap);
-   int		format_x(format_t fmt, va_list ap);
-   int		format_X(format_t fmt, va_list ap);
-   */
-int strfromd(char *restrict str, size_t n, const char *restrict format, float fp);
+int		format_d(format_t fmt, long int val);
+//int		format_x(format_t fmt, va_list ap);
+//int		format_X(format_t fmt, va_list ap);
+
+void	print_format(format_t fmt);
+char*	ltoa(long int num);
+int   myatoi(char **str);
+void  putstr(const char *str);
 
 #endif

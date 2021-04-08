@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int base_d(format_t fmt, char *str, int val) {
+int base_d(format_t fmt, char *str, long int val) {
     int i;
 
     i = strlen(str);
@@ -29,14 +29,12 @@ int width_d(format_t fmt, int ret, int len) {
     return (ret);
 }
 
-int	format_d(format_t fmt, va_list ap) {
+int	format_d(format_t fmt, long int val) {
     int     ret;
-    int     val;
     int     len;
     char*   str;
 
-    val = va_arg(ap, int);
-    str = tostr(val);
+    str = ltoa(val);
     ret = val < 0;
     if (fmt.is_minus_flag) {
         ret += base_d(fmt, str, val);

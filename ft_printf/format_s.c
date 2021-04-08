@@ -4,52 +4,39 @@ int	base_s(format_t fmt, char *val) {
     int i;
 
     i = 0;
-    while (val && val[i] && (i < fmt.precision || fmt.precision < 0))
+    while (val[i] && (i < fmt.precision || fmt.precision < 0))
         putchar(val[i++]);
     return (i);
 }
 
-char *nullify(format_t *fmt, char *val) {
+int width_s(format_t fmt, int i) {
 
-    if (val == NULL) {
-        if (-1 < fmt->precision && fmt->precision < 6)
-            fmt->precision = 0;
-        val = strdup("(null)");
-    }
-    return (val);
-}
-
-int width_s(format_t fmt, int ret, int len) {
-
-    while(ret + len < ABS(fmt.width)){
+    while(i < ABS(fmt.width)){
         putchar(' ');
-        ret++;
+        i++;
     }
-    return (ret);
+    return (i);
 }
 
-int	format_s(format_t fmt, va_list ap) {
+int	format_s(format_t fmt, char *val) {
     int ret;
     int len;
-    int null;
-    char* val;
 
-    if(!(val = va_arg(ap, char*)))
-        null = 1;
-    val = nullify(&fmt, val);
-    ret = 0;
+    if(val == NULL) {
+        if (-1 < fmt.precision && fmt.precision < 6)
+            fmt.precision = 0;
+        return(format_s(fmt, "(null)"));
+    }
     if (fmt.is_minus_flag) {
-        ret += base_s(fmt, val);
-        ret += width_s(fmt, ret, 0);
+        ret = base_s(fmt, val);
+        ret += width_s(fmt, ret);
     }
     else {
         len = 0;
         while (val && val[len] && (len < fmt.precision || fmt.precision < 0))
             len++;
-        ret += width_s(fmt, ret, len);
+        ret = width_s(fmt, len);
         ret += base_s(fmt, val);
     }
-    if (null)
-        free(val);
     return (ret);
 }
