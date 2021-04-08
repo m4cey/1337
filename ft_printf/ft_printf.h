@@ -27,15 +27,15 @@ int		evaluate(format_t fmt, va_list ap);
 
 int		format_c(format_t fmt, char val);
 int		format_s(format_t fmt, char *val);
-//int		format_p(format_t fmt, va_list ap);
+int		format_p(format_t fmt, void *val);
 int		format_d(format_t fmt, long int val);
-int		format_x(format_t fmt, unsigned int val, int alpha_offset);
+int		format_x(format_t fmt, long unsigned int val, int alpha_offset, int alternate);
 
 void	print_format(format_t fmt);
 char*	ltoa(long int num);
-char*	utoh(unsigned int num, int alpha_offset);
+char*	ultohex(long unsigned int num, int alpha_offset);
 int   myatoi(char **str);
 void  putstr(const char *str);
-unsigned int power(unsigned int base, unsigned int exponent);
+long unsigned int power(unsigned int base, int exponent);
 
 #endif

@@ -62,22 +62,22 @@ char*	ltoa(long int num) {
     return (ret);
 }
 
-unsigned int power(unsigned int base, unsigned int exponent) {
-    unsigned int ret;
+long unsigned int power(unsigned int base, int exponent) {
+    long unsigned int ret;
 
     ret = 1;
-    while (0 < exponent) {
+    while (exponent > 0) {
         ret *= base;
         exponent--;
     }
     return (ret);
 }
 
-char*	utoh(unsigned int num, int alpha_offset) {
+char*	ultohex(long unsigned int num, int alpha_offset) {
     char* ret;
-    unsigned int i;
-    unsigned int j;
-    unsigned int	temp;
+    int i;
+    int j;
+    long unsigned int temp;
 
     i = 0;
     j = 0;
