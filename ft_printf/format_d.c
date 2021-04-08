@@ -17,6 +17,18 @@ int base_d(format_t fmt, char *str, int val) {
     return (i);
 }
 
+int width_d(format_t fmt, int ret, int len) {
+
+    while(ret + len < ABS(fmt.width)){
+        if (!fmt.is_minus_flag && fmt.is_zero_flag && fmt.precision < 0)
+            putchar('0');
+        else
+            putchar(' ');
+        ret++;
+    }
+    return (ret);
+}
+
 int	format_d(format_t fmt, va_list ap) {
     int     ret;
     int     val;
@@ -28,23 +40,14 @@ int	format_d(format_t fmt, va_list ap) {
     ret = val < 0;
     if (fmt.is_minus_flag) {
         ret += base_d(fmt, str, val);
-        while(ret < ABS(fmt.width)){
-            putchar(' ');
-            ret++;
-        }
+        ret += width_d(fmt, ret, 0);
     }
     else {
         len = strlen(str);
         while (fmt.precision >= 0 && len < fmt.precision && len++);
         if (val < 0 && fmt.is_zero_flag)
             putchar('-');
-        while(ret + len < ABS(fmt.width)){
-            if (fmt.is_zero_flag && fmt.precision < 0)
-                putchar('0');
-            else
-                putchar(' ');
-            ret++;
-        }
+        ret += width_d(fmt, ret, len);
         ret += base_d(fmt, str, val);
     }
     free(str);

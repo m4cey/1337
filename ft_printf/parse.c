@@ -4,9 +4,9 @@
 void	print_format(format_t fmt){
 
     putchar('%');
-    if (fmt.is_minus_flag || fmt.width < 0)
+    if (fmt.is_minus_flag)
         putchar('-');
-    else if (fmt.is_zero_flag)
+    if (fmt.is_zero_flag)
         putchar('0');
     if (fmt.width)
         printf("%d", ABS(fmt.width));
@@ -100,6 +100,8 @@ int	parse(format_t *fmt, const char **str, va_list ap){
     if (fmt->width < 0)
         fmt->is_minus_flag = 1;
     if (fmt->precision >= 0)
+        fmt->is_zero_flag = 0;
+    if (fmt->is_minus_flag)
         fmt->is_zero_flag = 0;
     fmt->specifier = *ptr;
     *str = ptr + 1;
