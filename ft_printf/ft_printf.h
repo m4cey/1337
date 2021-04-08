@@ -9,7 +9,7 @@
 #include <stdio.h>
 // }}
 #define ABS(x) x * (-1 * (x < 0)) + x * (x >= 0)
-#define TYPES "cspdiuxX"
+#define TYPES "cspdiuxX%"
 
 typedef struct {
     int		is_zero_flag;

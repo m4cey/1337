@@ -1,6 +1,11 @@
 #include "ft_printf.h"
 
-int evaluate(format_t fmt, va_list ap){
+int format_percent() {
+    putchar('%');
+    return (2);
+}
+
+int evaluate(format_t fmt, va_list ap) {
     int ret;
 
     ret = 0;
@@ -12,5 +17,7 @@ int evaluate(format_t fmt, va_list ap){
         ret = format_d(fmt, va_arg(ap, int));
     if (fmt.specifier == 'u')
         ret = format_d(fmt, va_arg(ap, unsigned int));
+    if (fmt.specifier == '%')
+        ret = format_percent();
     return (ret);
 }

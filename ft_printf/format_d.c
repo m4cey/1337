@@ -38,7 +38,7 @@ int	format_d(format_t fmt, long int val) {
     ret = val < 0;
     if (fmt.is_minus_flag) {
         ret += base_d(fmt, str, val);
-        ret += width_d(fmt, ret, 0);
+        ret = width_d(fmt, ret, 0);
     }
     else {
         len = strlen(str);
@@ -46,7 +46,7 @@ int	format_d(format_t fmt, long int val) {
         if (val < 0 && fmt.is_zero_flag)
             putchar('-');
         ret += width_d(fmt, ret, len);
-        ret += base_d(fmt, str, val);
+        ret = base_d(fmt, str, val);
     }
     free(str);
     return ret;

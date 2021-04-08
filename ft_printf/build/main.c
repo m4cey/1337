@@ -3,9 +3,9 @@
 int main(void)
 {
     int d;
-    char *s = "%u";
-    unsigned int v = -1;
-    //char *v = NULL;
+    char *s = "%-05d";
+    //int v = -2;
+    char *v = "lmao";
 
     putchar('|');
     d = ft_printf(s, v);

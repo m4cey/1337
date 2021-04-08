@@ -19,6 +19,8 @@ void	print_format(format_t fmt){
 int myatoi(char **str){
     int ret;
 
+    if (str == NULL || *str == NULL)
+        return (0);
     ret = atoi(*str);
     while (**str == '-' || ('0' <= **str && **str <= '9'))
         (*str)++;
@@ -35,7 +37,7 @@ void putstr(const char *str) {
     }
 }
 
-char*	ltoa(long int num){
+char*	ltoa(long int num) {
     char* ret;
     int i;
     long int	temp;

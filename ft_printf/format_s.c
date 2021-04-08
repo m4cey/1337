@@ -29,11 +29,11 @@ int	format_s(format_t fmt, char *val) {
     }
     if (fmt.is_minus_flag) {
         ret = base_s(fmt, val);
-        ret += width_s(fmt, ret);
+        ret = width_s(fmt, ret);
     }
     else {
         len = 0;
-        while (val && val[len] && (len < fmt.precision || fmt.precision < 0))
+        while (val[len] && (len < fmt.precision || fmt.precision < 0))
             len++;
         ret = width_s(fmt, len);
         ret += base_s(fmt, val);
