@@ -2,7 +2,7 @@
 
 int format_percent() {
     putchar('%');
-    return (2);
+    return (1);
 }
 
 int evaluate(format_t fmt, va_list ap) {
@@ -17,7 +17,12 @@ int evaluate(format_t fmt, va_list ap) {
         ret = format_d(fmt, va_arg(ap, int));
     if (fmt.specifier == 'u')
         ret = format_d(fmt, va_arg(ap, unsigned int));
+    if (fmt.specifier == 'x')
+        ret = format_x(fmt, va_arg(ap, unsigned int), 'a');
+    if (fmt.specifier == 'X')
+        ret = format_x(fmt, va_arg(ap, unsigned int), 'A');
     if (fmt.specifier == '%')
         ret = format_percent();
+
     return (ret);
 }
