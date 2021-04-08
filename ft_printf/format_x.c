@@ -11,6 +11,8 @@ int base_x(format_t fmt, char *str, long unsigned int val, int alt) {
     if (fmt.precision == 0 && val == 0) {
         if (fmt.width > 0)
             putchar(' ');
+        else
+            i = 0;
     }
     else {
         if (alt && fmt.precision < 0)
@@ -20,16 +22,18 @@ int base_x(format_t fmt, char *str, long unsigned int val, int alt) {
     return (i);
 }
 
-int width_x(format_t fmt, int ret, int len) {
+int width_x(format_t fmt, int i) {
+    int j;
 
-    while(ret + len < ABS(fmt.width)){
+    j = 0;
+    while(j + i < ABS(fmt.width)){
         if (!fmt.is_minus_flag && fmt.is_zero_flag && fmt.precision < 0)
             putchar('0');
         else
             putchar(' ');
-        ret++;
+        j++;
     }
-    return (ret);
+    return (j);
 }
 
 int format_x(format_t fmt, long unsigned int val, int alpha_offset, int alt) {
@@ -41,12 +45,12 @@ int format_x(format_t fmt, long unsigned int val, int alpha_offset, int alt) {
     ret = alt * 2;
     if (fmt.is_minus_flag) {
         ret += base_x(fmt, str, val, alt);
-        ret = width_x(fmt, ret, 0);
+        ret += width_x(fmt, ret);
     }
     else {
         len = strlen(str);
         while (fmt.precision >= 0 && len < fmt.precision && len++);
-        ret = width_x(fmt, ret, len);
+        ret += width_x(fmt, ret + len);
         ret += base_x(fmt, str, val, alt);
     }
     free(str);

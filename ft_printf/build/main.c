@@ -1,13 +1,13 @@
 #include "../ft_printf.h"
-#include <inttypes.h>
+#include <limits.h>
 
 int main(void)
 {
     int d;
-    char *s = "%-020.13p";
-    int *v = &d;
-    //int v = 0x123;
-    //char *v = "";
+    char *s = "%d";
+    //int *v = &d;
+    int v = 0;
+    //char *v = "lmaoo";
 
     putchar('|');
     d = ft_printf(s, v);

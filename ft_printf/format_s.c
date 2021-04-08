@@ -10,12 +10,14 @@ int	base_s(format_t fmt, char *val) {
 }
 
 int width_s(format_t fmt, int i) {
+    int j;
 
-    while(i < ABS(fmt.width)){
+    j = 0;
+    while(i + j < ABS(fmt.width)){
         putchar(' ');
-        i++;
+        j++;
     }
-    return (i);
+    return (j);
 }
 
 int	format_s(format_t fmt, char *val) {
@@ -29,7 +31,7 @@ int	format_s(format_t fmt, char *val) {
     }
     if (fmt.is_minus_flag) {
         ret = base_s(fmt, val);
-        ret = width_s(fmt, ret);
+        ret += width_s(fmt, ret);
     }
     else {
         len = 0;
